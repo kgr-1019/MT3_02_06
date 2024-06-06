@@ -464,17 +464,22 @@ void DrawSphere(const Sphere& sphere, const Matrix4x4& viewProjectionMatrix, con
 // AABB1の描画
 void DrawAABB1(const AABB& aabb1, Matrix4x4& viewProjectionMatrix, const Matrix4x4& viewportMatrix, uint32_t color)
 {
+	// 一辺の長さ
+	//float radius1 = 0.5f;
+
+	//int index = 8;
+
 	// aabb1
 	Vector3 vertices1[8];
 	vertices1[0] = { aabb1.min.x,aabb1.min.y,aabb1.min.z };
-	vertices1[1] = { aabb1.min.x + 0.5f,aabb1.min.y,aabb1.min.z };
-	vertices1[2] = { aabb1.min.x + 0.5f,aabb1.min.y,aabb1.min.z + 0.5f };
-	vertices1[3] = { aabb1.min.x,aabb1.min.y,aabb1.min.z + 0.5f };
+	vertices1[1] = { aabb1.max.x,aabb1.min.y,aabb1.min.z };
+	vertices1[2] = { aabb1.max.x,aabb1.min.y,aabb1.max.z };
+	vertices1[3] = { aabb1.min.x,aabb1.min.y,aabb1.max.z };
 
-	vertices1[4] = { aabb1.max.x - 0.5f,aabb1.max.y,aabb1.max.z - 0.5f };
-	vertices1[5] = { aabb1.max.x,aabb1.max.y,aabb1.max.z - 0.5f };
+	vertices1[4] = { aabb1.min.x,aabb1.max.y,aabb1.min.z };
+	vertices1[5] = { aabb1.max.x,aabb1.max.y,aabb1.min.z };
 	vertices1[6] = { aabb1.max.x,aabb1.max.y,aabb1.max.z };
-	vertices1[7] = { aabb1.max.x - 0.5f,aabb1.max.y,aabb1.max.z };
+	vertices1[7] = { aabb1.min.x,aabb1.max.y,aabb1.max.z };
 
 
 	// a,b,cをScreen座標系まで変換
@@ -502,16 +507,17 @@ void DrawAABB1(const AABB& aabb1, Matrix4x4& viewProjectionMatrix, const Matrix4
 	}
 
 	// aabb1
+	// 下辺
 	Novice::DrawLine((int)screenVertices1[0].x, (int)screenVertices1[0].y, (int)screenVertices1[1].x, (int)screenVertices1[1].y, color);
 	Novice::DrawLine((int)screenVertices1[1].x, (int)screenVertices1[1].y, (int)screenVertices1[2].x, (int)screenVertices1[2].y, color);
 	Novice::DrawLine((int)screenVertices1[2].x, (int)screenVertices1[2].y, (int)screenVertices1[3].x, (int)screenVertices1[3].y, color);
 	Novice::DrawLine((int)screenVertices1[3].x, (int)screenVertices1[3].y, (int)screenVertices1[0].x, (int)screenVertices1[0].y, color);
-
+	// 上辺
 	Novice::DrawLine((int)screenVertices1[4].x, (int)screenVertices1[4].y, (int)screenVertices1[5].x, (int)screenVertices1[5].y, color);
 	Novice::DrawLine((int)screenVertices1[5].x, (int)screenVertices1[5].y, (int)screenVertices1[6].x, (int)screenVertices1[6].y, color);
 	Novice::DrawLine((int)screenVertices1[6].x, (int)screenVertices1[6].y, (int)screenVertices1[7].x, (int)screenVertices1[7].y, color);
 	Novice::DrawLine((int)screenVertices1[7].x, (int)screenVertices1[7].y, (int)screenVertices1[4].x, (int)screenVertices1[4].y, color);
-
+	// 側辺
 	Novice::DrawLine((int)screenVertices1[1].x, (int)screenVertices1[1].y, (int)screenVertices1[5].x, (int)screenVertices1[5].y, color);
 	Novice::DrawLine((int)screenVertices1[2].x, (int)screenVertices1[2].y, (int)screenVertices1[6].x, (int)screenVertices1[6].y, color);
 	Novice::DrawLine((int)screenVertices1[3].x, (int)screenVertices1[3].y, (int)screenVertices1[7].x, (int)screenVertices1[7].y, color);
