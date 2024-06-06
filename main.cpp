@@ -464,11 +464,6 @@ void DrawSphere(const Sphere& sphere, const Matrix4x4& viewProjectionMatrix, con
 // AABB1の描画
 void DrawAABB1(const AABB& aabb1, Matrix4x4& viewProjectionMatrix, const Matrix4x4& viewportMatrix, uint32_t color)
 {
-	// 一辺の長さ
-	//float radius1 = 0.5f;
-
-	//int index = 8;
-
 	// aabb1
 	Vector3 vertices1[8];
 	vertices1[0] = { aabb1.min.x,aabb1.min.y,aabb1.min.z };
@@ -588,7 +583,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		Matrix4x4 viewportMatrix = MakeViewportMatrix(0, 0, float(kWindowsWidth), float(kWindowsHeight), 0.0f, 1.0f);
 
-
+		// minとmaxが入れ替わらないように
 		aabb1.min.x = (std::min)(aabb1.min.x, aabb1.max.x);
 		aabb1.max.x = (std::max)(aabb1.min.x, aabb1.max.x);
 		aabb1.min.y = (std::min)(aabb1.min.y, aabb1.max.y);
